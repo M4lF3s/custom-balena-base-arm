@@ -3,7 +3,6 @@ balena-sdk==9.0.0
 curlify==2.2.1
 Cython==0.29.7
 docutils==0.15.2
-Kivy==1.11.0
 lockfile==0.12.2
 PGen==0.2.1
 Pillow==6.2.1
