@@ -1,4 +1,4 @@
-FROM balenalib/armv7hf-debian-python:3.7.4-buster-build-20191003
+FROM balenalib/armv7hf-debian-python:3.7.4-buster-build
 
 RUN [ "cross-build-start" ]
 
@@ -55,10 +55,34 @@ RUN git clone --branch v1.0.4 --single-branch https://github.com/RedisJSON/Redis
     && rm -rf /usr/src/RedisJSON
 
 
+### Manually install and patch libs that use json
+WORKDIR /usr/src
+COPY patches/customjson.patch .
+RUN git clone --branch v3.17.0 --single-branch https://github.com/simplejson/simplejson.git /usr/src/simplejson \
+    && patch -p0 < customjson.patch \
+    && pip install ./simplejson \
+    && rm -rf /usr/src/simplejson \
+    && rm -rf /usr/src/customjson.patch
+
+COPY patches/requests.patch .
+RUN git clone --branch v2.23.0 --single-branch https://github.com/psf/requests.git /usr/src/requests \
+    && patch -p0 < requests.patch \
+    && pip install ./requests \
+    && rm -rf /usr/src/requests \
+    && rm -rf /usr/src/requests.patch
+
+COPY patches/rejson.patch .
+RUN git clone --branch 0.5.3 --single-branch https://github.com/RedisJSON/redisjson-py.git /usr/src/rejson \
+    && patch -p0 < rejson.patch \
+    && pip install ./rejson \
+    && rm -rf /usr/src/rejson \
+    && rm -rf /usr/src/rejson.patch
+
+
 ### Install python libraries
 COPY requirements.txt ./
 RUN pip3 install --upgrade pip && \
-    pip3 install -r ./requirements.txt
+    pip3 install -r ./requirements.txt 
 
 
 RUN [ "cross-build-end" ]
