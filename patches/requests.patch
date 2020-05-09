@@ -1,0 +1,31 @@
+diff -ruN requests/requests/compat.py customrequests/requests/compat.py
+--- requests/requests/compat.py	2020-05-07 08:42:41.116815630 +0200
++++ customrequests/requests/compat.py	2020-05-07 08:48:50.249892101 +0200
+@@ -25,10 +25,11 @@
+ #: Python 3.x?
+ is_py3 = (_ver[0] == 3)
+ 
+-try:
+-    import simplejson as json
+-except ImportError:
+-    import json
++# try:
++#     import simplejson as json
++# except ImportError:
++#     import json
++import customjson as json
+ 
+ # ---------
+ # Specifics
+diff -ruN requests/requests/help.py customrequests/requests/help.py
+--- requests/requests/help.py	2020-05-07 08:42:41.120815598 +0200
++++ customrequests/requests/help.py	2020-05-07 08:49:25.685672719 +0200
+@@ -1,7 +1,7 @@
+ """Module containing bug report helper(s)."""
+ from __future__ import print_function
+ 
+-import json
++import customjson as json
+ import platform
+ import sys
+ import ssl

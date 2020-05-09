@@ -12,8 +12,6 @@ pyserial==3.4
 python-resources==0.3
 qrcode==6.1
 redis==3.3.11
-rejson==0.5.4
-requests==2.22.0
 requests-futures==1.0.0
 RPi.GPIO==0.7.0
 setuptools==41.0.1

@@ -1,0 +1,10 @@
+diff -ruN rejson/rejson/client.py customrejson/rejson/client.py
+--- rejson/rejson/client.py	2020-05-07 09:03:49.350089911 +0200
++++ customrejson/rejson/client.py	2020-05-07 09:05:03.841826758 +0200
+@@ -1,5 +1,5 @@
+ import six
+-import json
++import customjson as json
+ from redis import StrictRedis
+ from redis.client import Pipeline
+ from redis._compat import (long, nativestr)
